@@ -1,0 +1,45 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" language="JavaScript">
+    var xmlHttp; 
+    //Call a simple webmethod with parameters returning a single string
+    function CallSimpleWebService(FunctionName, ParameterNameList, ParameterValueList, ServiceURL) {
+        var CompleteURL = ServiceURL + '/' + FunctionName + '?';
+        for (i = 0; i < ParameterNameList.length; i++) {
+            CompleteURL = CompleteURL + ParameterNameList[i] + "=" + ParameterValueList[i];
+            if (i != ParameterNameList.length - 1)
+                CompleteURL = CompleteURL + "&";
+        }
+        xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("get", CompleteURL, false);
+        xmlHttp.setRequestHeader("Host", "localhost");
+        xmlHttp.onreadystatechange = doUpdate;
+        xmlHttp.send();
+        return false;
+    }
+    function doUpdate() {
+        //debugger;
+        if (xmlHttp.readyState == 4) {
+            var responseElement = xmlHttp.responseXML.getElementsByTagName("string")[0];
+            var exch = responseElement.firstChild.nodeValue;
+            alert(exch);
+        }
+    }
+    function myfunc() {
+        CallSimpleWebService("getLanguages", new Array("user", "pass"), new Array('manhnd', '123456'), "http://ideone.com/api/1/service.wsdl");
+    }
+    
+</script>
+    </head>
+    <body>
+        <div id="aa">TODO write content</div>
+        <button onclick="myfunc();">OK</button>
+    </body>
+</html>

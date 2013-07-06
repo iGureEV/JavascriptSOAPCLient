@@ -1,0 +1,31 @@
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        	<script type="text/javascript" src="soapclient.js"></script>
+	<script type="text/javascript">
+	function HelloWorld()
+	{
+		var pl = new SOAPClientParameters();
+                pl.add('user', 'manhnd');
+                pl.add('pass', '123456');
+		SOAPClient.invoke("http://ideone.com/api/1/service", "getLanguages", pl, true, GetSoapResponse_callBack);
+	}
+	function GetSoapResponse_callBack(r, soapResponse)
+	{
+            alert("AAA");
+            alert("r: " + r);
+            alert("SOAP response: " + soapResponse.xml);
+	}
+        </script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>
+        <div id="result">TODO write content</div>
+        <button onclick="HelloWorld();">OK</button>
+    </body>
+</html>
